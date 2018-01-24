@@ -1,5 +1,6 @@
 jdeserialize
 ============
+[![Build Status](https://travis-ci.org/dehydr8/jdserialize.svg?branch=master)](https://travis-ci.org/dehydr8/jdserialize)
 
 *jdeserialize* is a PHP library that aims to provide functions for reading serialized Java objects. The goal is to provide a representation of the serialized Java objects in an associative array format.
 
