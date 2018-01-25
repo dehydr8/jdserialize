@@ -72,6 +72,9 @@ class Deserializer {
   }
 
   /**
+   * Reads the next signed long (8 byte)
+   * FIX: might not return signed longs correctly
+   * 
    * http://www.docjar.com/html/api/java/io/DataInputStream.java.html
    */
   private function readLong() {
@@ -86,12 +89,20 @@ class Deserializer {
       ($this->readByte() & 255 << 0);
   }
 
+  /**
+   * Reads the next signed integer (4 byte)
+   * 
+   * @return int
+   */
   private function readInt() {
-    return $this->unpack("N", 4);
+    $unsigned = $this->unpack("N", 4);
+    return unpack("l", pack("l", $unsigned))[1];
   }
 
   private function readShort() {
-    return $this->unpack("n", 2);
+    return
+      ($this->readByte() << 8) +
+      ($this->readByte() << 0);
   }
 
   private function readByte() {
@@ -464,7 +475,7 @@ class Deserializer {
 
   public function printClasses() {
     foreach ($this->classDescriptions as $description) {
-      ClassPrinter::print($description);
+      ClassPrinter::display($description);
     }
   }
 

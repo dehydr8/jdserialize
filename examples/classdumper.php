@@ -10,5 +10,5 @@ $jd = new Deserializer($bin);
 $objects = $jd->deserialize();
 
 foreach ($jd->getClasses() as $description) {
-  ClassPrinter::print($description);
+  ClassPrinter::display($description);
 }

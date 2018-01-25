@@ -12,7 +12,7 @@ class ClassPrinter {
    * @param ClassDescription $description
    * @return void
    */
-  public static function print($description) {
+  public static function display($description) {
     if ($description->type === ClassDescriptionType::NORMALCLASS) {
       echo "// " . dechex($description->getHandle()) . "\r\n";
       if (($description->flags & Constants::SC_ENUM) != 0) {
