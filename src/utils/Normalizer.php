@@ -32,12 +32,16 @@ class Normalizer {
 
     $normalized = array();
 
-    if (count($instance->annotations) > 0) {
+    if (count($instance->annotations) > 0 && !in_array($instance->classDescription->name, array('java.util.Vector'))) {
       foreach ($instance->annotations as $class => $arr) {
         foreach ($arr as $value) {
           if (!is_a($value, 'dehydr8\Jdeserialize\content\BlockData'))
             $normalized[] = Normalizer::value($value);
         }
+      }
+    } else if ($instance->classDescription->name === 'java.util.Vector') {
+      for ($i=0; $i<$instance->fieldData["java.util.Vector"]["elementCount"]; $i++) {
+        $normalized[] = Normalizer::value($instance->fieldData["java.util.Vector"]["elementData"]->data[$i]);
       }
     } else {
       foreach ($instance->fieldData as $class => $d) {
