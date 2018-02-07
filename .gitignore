@@ -1,3 +1,5 @@
 vendor/
 composer.lock
+samples/internal/
+dumped
 .DS_Store
